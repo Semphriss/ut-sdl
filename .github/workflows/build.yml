@@ -1,0 +1,49 @@
+name: Build and upload
+
+on:
+  pull_request: {}
+  push:
+    branches:
+      - '*'
+    tags:
+      - '*'
+
+# Must set Settings -> Actions -> General -> Workflow permissions to
+# "Read and write permissions"
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [amd64, arm64, armhf]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Build
+        env:
+          ARCH: ${{ matrix.arch }}
+        run: |
+          docker build . --build-arg ARCH=$ARCH -t utsdl-$ARCH
+          docker run --rm utsdl-$ARCH > utsdl-$ARCH.tgz
+
+      - name: Upload CI build
+        uses: actions/upload-artifact@v4
+        with:
+          name: utsdl-${{ matrix.arch }}
+          path: utsdl-*.tgz
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: utsdl-*.tgz
+          draft: false
+          make_latest: true
