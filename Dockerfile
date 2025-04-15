@@ -1,9 +1,8 @@
 ARG UT_VERSION=20.04
 ARG ARCH=amd64
-ARG CLICKABLE_VERSION=8.2.0
 ARG BUILD_TYPE=Release
 
-FROM clickable/ci-$UT_VERSION-$ARCH:$CLICKABLE_VERSION AS base
+FROM clickable/ci-$UT_VERSION-$ARCH AS base
 
 FROM base AS build-amd64
 ARG CMAKE_ARCH=x86_64
@@ -26,9 +25,9 @@ ARG SDL3IMGREF=release-3.2.4
 ARG SDL2IMGREF=release-2.8.8
 ARG SDL3TTFREF=release-3.2.2
 ARG SDL2TTFREF=release-2.24.0
-ARG SDL3MIXREF=main # Not yet released
+#ARG SDL3MIXREF=main # Not yet released
 ARG SDL2MIXREF=release-2.8.1
-ARG SDL3NETREF=main # Not yet released
+#ARG SDL3NETREF=main # Not yet released
 ARG SDL2NETREF=release-2.2.0
 
 ARG CMAKE_ARGS=-DCMAKE_INSTALL_PREFIX=/usr/local \

@@ -19,6 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         arch: [amd64, arm64, armhf]
+        os: [16.04, 20.04, ut24.04-1.x]
 
     runs-on: ubuntu-latest
 
@@ -30,14 +31,15 @@ jobs:
       - name: Build
         env:
           ARCH: ${{ matrix.arch }}
+          OS: ${{ matrix.os }}
         run: |
-          docker build . --build-arg ARCH=$ARCH -t utsdl-$ARCH
-          docker run --rm utsdl-$ARCH > utsdl-$ARCH.tgz
+          docker build . --build-arg ARCH=$ARCH --build-arg UT_VERSION=$OS -t utsdl-$ARCH-$OS
+          docker run --rm utsdl-$ARCH-$OS > utsdl-$ARCH-$OS.tgz
 
       - name: Upload CI build
         uses: actions/upload-artifact@v4
         with:
-          name: utsdl-${{ matrix.arch }}
+          name: utsdl-${{ matrix.arch }}-${{ matrix.os }}
           path: utsdl-*.tgz
 
       - name: Create Release
