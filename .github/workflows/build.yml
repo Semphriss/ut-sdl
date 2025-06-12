@@ -33,7 +33,7 @@ jobs:
           ARCH: ${{ matrix.arch }}
           OS: ${{ matrix.os }}
         run: |
-          docker build . --build-arg ARCH=$ARCH --build-arg UT_VERSION=$OS -t utsdl-$ARCH-$OS
+          docker build . --build-arg ARCH=$ARCH --build-arg UT_VERSION=$OS -t utsdl-$ARCH-$OS --no-cache
           docker run --rm utsdl-$ARCH-$OS > utsdl-$ARCH-$OS.tgz
 
       - name: Upload CI build
