@@ -21,7 +21,8 @@ ARG SDL2MIXREF=release-2.8.1
 #ARG SDL3NETREF=main # Not yet stable
 ARG SDL2NETREF=release-2.2.0
 
-ARG CMAKE_ARGS=-DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+ARG PREFIX=/opt/SDL-$BUILD_TYPE/
+ARG CMAKE_ARGS=-DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=$BUILD_TYPE
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -93,9 +94,9 @@ RUN apt-get update && apt-get install -y build-essential cmake git nasm \
  && cmake --install build \
  && cd / \
  && rm -rf /SDL2_net \
- && tar -czf /utsdl.tgz /usr/local/include/SDL* /usr/local/lib/cmake/SDL* \
-       /usr/local/lib/pkgconfig/SDL* /usr/local/lib/pkgconfig/sdl* \
-       /usr/local/lib/libSDL* /usr/local/bin/sdl*
+ && tar -czf /utsdl.tgz $PREFIX/include/SDL* $PREFIX/lib/cmake/SDL* \
+       $PREFIX/lib/pkgconfig/SDL* $PREFIX/lib/pkgconfig/sdl* \
+       $PREFIX/lib/libSDL* $PREFIX/bin/sdl*
 
 # && git clone --depth=1 https://github.com/libsdl-org/SDL_mixer.git -b $SDL3MIXREF SDL3_mixer \
 # && cd /SDL3_mixer \
