@@ -28,7 +28,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Everything in one line, else Docker will "export layers" and take >16gb, which
 # isn't appreciated by GitHub Actions
 RUN apt-get update && apt-get install -y build-essential cmake git nasm \
- && apt-get install -y libasound2-dev:$ARCH libaudio-dev:$ARCH libjack-dev:$ARCH libsndio-dev:$ARCH libx11-dev:$ARCH libxext-dev:$ARCH libxrandr-dev:$ARCH libxcursor-dev:$ARCH libxfixes-dev:$ARCH libxi-dev:$ARCH libxss-dev:$ARCH libxkbcommon-dev:$ARCH libdrm-dev:$ARCH libgbm-dev:$ARCH libgl1-mesa-dev:$ARCH libgles2-mesa-dev:$ARCH libegl1-mesa-dev:$ARCH libdbus-1-dev:$ARCH libudev-dev:$ARCH libwayland-dev:$ARCH libfreetype-dev:$ARCH \
+ && apt-get install -y libasound2-dev:$ARCH libaudio-dev:$ARCH libjack-dev:$ARCH libsndio-dev:$ARCH libx11-dev:$ARCH libxext-dev:$ARCH libxrandr-dev:$ARCH libxcursor-dev:$ARCH libxfixes-dev:$ARCH libxi-dev:$ARCH libxss-dev:$ARCH libxtst-dev:$ARCH libxkbcommon-dev:$ARCH libdrm-dev:$ARCH libgbm-dev:$ARCH libgl1-mesa-dev:$ARCH libgles2-mesa-dev:$ARCH libegl1-mesa-dev:$ARCH libdbus-1-dev:$ARCH libudev-dev:$ARCH libwayland-dev:$ARCH libfreetype-dev:$ARCH \
  && git clone --depth=1 https://github.com/Semphriss/SDL.git -b $SDL3REF SDL3 \
  && cd /SDL3 \
  && git submodule update --init --recursive \
