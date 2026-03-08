@@ -12,7 +12,7 @@ ARG BUILD_TYPE
 # For the latest revision, use "main" for SDL3 & SDL2-compat and "SDL2" for SDL2
 ARG SDL3REF=ubuntu-touch
 ARG SDL2COMPATREF=main
-ARG SDL3IMGREF=main # Awaiting fixes, coming after 3.2.4
+ARG SDL3IMGREF=release-3.4.0
 ARG SDL2IMGREF=SDL2 # Awaiting fixes, coming after 2.8.8
 ARG SDL3TTFREF=release-3.2.2
 ARG SDL2TTFREF=release-2.24.0
