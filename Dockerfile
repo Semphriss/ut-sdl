@@ -48,7 +48,7 @@ RUN apt-get update && apt-get install -y build-essential cmake git nasm \
  && git clone --depth=1 https://github.com/libsdl-org/SDL_image.git -b $SDL3IMGREF SDL3_image \
  && cd /SDL3_image \
  && git submodule update --init --recursive \
- && cmake -B build -S . -DSDLIMAGE_VENDORED=ON -DAOM_NEON_INTRIN_FLAG=-mfpu=neon -DDAV1D_ASM=OFF $CMAKE_ARGS \
+ && cmake -B build -S . -DDAV1D_ASM=OFF $CMAKE_ARGS \
  && cmake --build build --parallel \
  && cmake --install build \
  && cd / \
@@ -56,7 +56,7 @@ RUN apt-get update && apt-get install -y build-essential cmake git nasm \
  && git clone --depth=1 https://github.com/libsdl-org/SDL_image.git -b $SDL2IMGREF SDL2_image \
  && cd /SDL2_image \
  && git submodule update --init --recursive \
- && cmake -B build -S . -DSDL2IMAGE_VENDORED=ON -DDAV1D_ASM=OFF $CMAKE_ARGS \
+ && cmake -B build -S . $CMAKE_ARGS \
  && cmake --build build --parallel \
  && cmake --install build \
  && cd / \
@@ -64,7 +64,7 @@ RUN apt-get update && apt-get install -y build-essential cmake git nasm \
  && git clone --depth=1 https://github.com/libsdl-org/SDL_ttf.git -b $SDL3TTFREF SDL3_ttf \
  && cd /SDL3_ttf \
  && git submodule update --init --recursive \
- && cmake -B build -S . -DSDLTTF_VENDORED=ON $CMAKE_ARGS \
+ && cmake -B build -S . \
  && cmake --build build --parallel \
  && cmake --install build \
  && cd / \
@@ -72,7 +72,7 @@ RUN apt-get update && apt-get install -y build-essential cmake git nasm \
  && git clone --depth=1 https://github.com/libsdl-org/SDL_ttf.git -b $SDL2TTFREF SDL2_ttf \
  && cd /SDL2_ttf \
  && git submodule update --init --recursive \
- && cmake -B build -S . -DSDL2TTF_VENDORED=ON $CMAKE_ARGS \
+ && cmake -B build -S . \
  && cmake --build build --parallel \
  && cmake --install build \
  && cd / \
